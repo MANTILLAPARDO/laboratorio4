@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:p="http://primefaces.org/ui">
+    <h:head></h:head>
+    
+    <h:body>
+    <p:layout style="min-width:400px;min-height:200px;">
+    <p:layoutUnit position="west" resizable="true"  minSize="40" maxSize="250">
+        <div align='center'>
+            <p:commandButton value="CAMBIAR MONEDA" update="compraTotal,moneda" actionListener="#{estadocarrito.actualicePrecio()}" ></p:commandButton>
+            <br></br>
+            <br></br>
+            <br></br>
+            <p:commandButton value="AÑADIR AL CARRITO"  update="productos,moneda,compraTotal,formulario_tabla:tabla" actionListener="#{estadocarrito.actualiceCarrito()}"></p:commandButton>
+            <br></br>
+            <br></br>
+            <br></br>
+            VALOR DE LA COMPRA
+            <br></br>
+            <p:outputLabel id="compraTotal" value="#{estadocarrito.compra}" />
+            <br></br>
+            <p:outputLabel id="moneda" value="#{estadocarrito.moneda}" />
+            <br></br>
+            <br></br>
+            <p:dataTable id="productos" var="item" value="#{estadocarrito.items}">
+                <p:column headerText="NOMBRE">
+                    <p:outputLabel value="#{item.nombre}">
+                    </p:outputLabel>
+                </p:column>
+                <p:column headerText="CANTIDAD">
+                    <p:outputLabel value="#{item.cantidad}">
+                    </p:outputLabel>
+                </p:column>
+            </p:dataTable>
+        </div>
+    </p:layoutUnit>
+    <h:form id="formulario_tabla">
+        <p:layoutUnit id="centro" position="center">
+            <p:dataTable id="tabla"  var="products" value="#{estadocarrito.productos}">
+                <p:column headerText="ID">
+                    <p:outputLabel value="#{products.id}">
+                    </p:outputLabel>
+                </p:column>
+                <p:column headerText="NOMBRE">
+                     <p:outputLabel value="#{products.nombre}">
+                    </p:outputLabel>
+                </p:column>
+                <p:column headerText="PRECIO (USD)">
+                     <p:outputLabel value="#{products.precioEnUSD}">
+                    </p:outputLabel>
+                </p:column>
+                <p:column headerText="SELECCION">
+                    <p:spinner id="cantidad" value="1" min="1"  size="8" />
+                </p:column>
+                <p:column headerText="CANTIDAD">
+                    <p:commandButton id="select" value="#{estadocarrito.select}" update="select" actionListener="#{estadocarrito.seleccionar(products)}">
+                    </p:commandButton> 
+                </p:column>
+            </p:dataTable>
+        </p:layoutUnit>
+    </h:form>
+</p:layout>       
+</h:body>
+
+</html>
