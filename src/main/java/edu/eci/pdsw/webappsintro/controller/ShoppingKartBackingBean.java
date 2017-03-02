@@ -90,7 +90,7 @@ public class ShoppingKartBackingBean {
     //public void setSeleccion(Producto p){
         
     //}
-    public void seleccionar(Producto producto){
+    public void seleccionar(Producto producto,int cantidad){
             boolean resp=false;
             int index=-1;
             for(int i=0;i<itemTemp.size()&&!resp;i++){
@@ -104,11 +104,14 @@ public class ShoppingKartBackingBean {
                 select="Seleccionar";
             }
             else{
-                if(producto!=null){
-                Item nitem=new Item(producto.getNombre(),producto.getPrecioEnUSD(),cantidades.get(producto));
+                if(producto!=null&&cantidad!=0){
+                Item nitem=new Item(producto.getNombre(),producto.getPrecioEnUSD(),cantidad);
                 itemTemp.add(nitem);
-                }
                 select="Remover";
+                }else{
+                    select="Seleccionar";
+                }
+                
             }
     }
     public void cantSelect(Producto producto,int cant){

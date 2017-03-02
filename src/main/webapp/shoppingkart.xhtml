@@ -52,10 +52,10 @@
                     </p:outputLabel>
                 </p:column>
                 <p:column headerText="SELECCION">
-                    <p:spinner id="cantidad" value="1" min="1"  size="8" />
+                    <p:spinner id="cantidad" value="1" min="0"  size="8" binding="#{cant}"/>
                 </p:column>
                 <p:column headerText="CANTIDAD">
-                    <p:commandButton id="select" value="#{estadocarrito.select}" update="select" actionListener="#{estadocarrito.seleccionar(products)}">
+                    <p:commandButton id="select" value="#{estadocarrito.select}" update="select" actionListener="#{estadocarrito.seleccionar(products,cant.value)}">
                     </p:commandButton> 
                 </p:column>
             </p:dataTable>
